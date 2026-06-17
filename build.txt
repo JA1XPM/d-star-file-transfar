@@ -1,0 +1,49 @@
+【ビルド方法】
+このソースは C# / .NET 8 で作成しています。
+ソースからビルドする場合は、Microsoft の .NET 8 SDK をインストールしてください。
+
+作業フォルダは、この build.txt がある outputs フォルダです。
+
+【通常ビルド】
+送信用:
+dotnet build .\src\DsxSend\DsxSend.csproj -c Release
+
+受信用:
+dotnet build .\src\DsxRecv\DsxRecv.csproj -c Release
+
+通常ビルドの出力先:
+.\src\DsxSend\bin\Release\net8.0\
+.\src\DsxRecv\bin\Release\net8.0\
+
+【単体 exe の作成】
+配布しやすい単体 exe を作る場合は、次のコマンドを実行してください。
+
+送信用:
+dotnet publish .\src\DsxSend\DsxSend.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false -p:EnableCompressionInSingleFile=true -o .\build\send
+
+受信用:
+dotnet publish .\src\DsxRecv\DsxRecv.csproj -c Release -r win-x64 --self-contained true -p:PublishSingleFile=true -p:DebugType=None -p:DebugSymbols=false -p:EnableCompressionInSingleFile=true -o .\build\recv
+
+単体 exe の出力先:
+.\build\send\dsx_send.exe
+.\build\recv\dsx_recv.exe
+
+【実行方法】
+送信:
+dsx_send.exe COM番号 通信速度 送信ファイル名
+
+例:
+dsx_send.exe COM9 9600 sample.bin
+
+受信:
+dsx_recv.exe COM番号 通信速度
+
+例:
+dsx_recv.exe COM11 9600
+
+【注意】
+受信側は、送信側から送られてくるファイル名で保存します。
+すでに同名ファイルがある場合は上書きに注意してください。
+
+大きなファイルを送る場合、事前に 7z などの外部ソフトで可逆圧縮してから送ると、
+ファイルの種類によっては転送時間を短くできます。
