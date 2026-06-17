@@ -24,7 +24,7 @@ dsx_recv.exe  受信側
 
 例:
 
-  dsx_send.exe COM11 9600 C:\Users\tunin\Downloads\IC-9700_front_panel.png
+  dsx_send.exe COM11 9600 C:\Users\JA1XPM\Downloads\IC-9700_front_panel.png
 
 【注意】
 ・受信側のファイル名は送信側から送られます。
